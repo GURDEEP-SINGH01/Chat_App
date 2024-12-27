@@ -7,7 +7,7 @@ exports.signUp = async (req, res) => {
         const { email, username, password, confirmPassword } = req.body;
 
         if (password != confirmPassword) {
-            res.send(400), json({ error: "Passwords don't match" })
+            return res.send(400).json({ error: "Passwords don't match" })
         }
 
         //HASH Password
@@ -34,15 +34,28 @@ exports.signUp = async (req, res) => {
 }
 
 exports.signIn = async (req, res) => {
-    const { username, password } = req.body;
     try {
-        const user = await User.findOne({ username, password });
-        if (user) {
-            res.json({ success: true, message: 'Sign-in successful', body: user });
-        } else {
-            res.json({ success: false, message: 'Invalid username or password' });
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+
+        const isCorrectPassword = await bcrypt.compare(password, user?.password || "");
+        if (!user || !isCorrectPassword) {
+            return res.status(400).json({ success: false, message: 'Invalid username or password' });
         }
+        generateTokenAndSetCookie(user._id, res);
+        res.json({
+            _id: user._id,
+            username: user.username,
+        });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+exports.signOut = (req, res) => {
+    try {
+        res.cookie("jwt", "", { maxAge: 0 });
+        res.status(200).json({ message: "Logged out succesfully" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+}

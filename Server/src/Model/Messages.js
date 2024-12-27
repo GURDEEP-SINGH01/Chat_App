@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const messages = new mongoose.Schema({
-    sender: {
+    senderId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    receiver: {
+    receiverId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -19,14 +19,10 @@ const messages = new mongoose.Schema({
         type: String, // Optional URL for attachments (e.g., images, files)
         default: null
     },
-    timestamp: {
-        type: Date,
-        default: Date.now // When the message was sent
-    },
     status: {
         type: String,
         enum: ['sent', 'delivered', 'read'], // Message delivery status
         default: 'sent'
     }
-})
+}, { timestamps: true })
 module.exports = mongoose.model('Messages', messages);

@@ -2,8 +2,8 @@ const User = require('../Model/Users');
 
 exports.getFriends = async (req, res) => {
     try {
-        const { sender } = req.body
-        const user = await User.findOne({ _id: sender });
+        const { senderId } = req.body
+        const user = await User.findOne({ _id: senderId });
         const friendsList = await Promise.all(
             user.friends.map((friend) => User.findOne({ _id: friend }))
         );
@@ -16,23 +16,22 @@ exports.getFriends = async (req, res) => {
 
 exports.addFriends = async (req, res) => {
     try {
-        const { sender, receiver } = req.body;
-        const senderId = await User.findOne({ _id: sender });
-        const receiverId = await User.findOne({ _id: receiver });
+        const { senderId, receiverId } = req.body;
+        const sender = await User.findOne({ _id: senderId });
+        const receiver = await User.findOne({ _id: receiverId });
 
-        if (!senderId || !receiverId) {
+        if (!sender || !receiver) {
             res.status(404).json({ message: "User not Found" });
         }
-        console.log(senderId);
-        if (!senderId.friends.includes(receiver)) {
-            senderId.friends.push(receiver);
-            await senderId.save();
-            console.log(senderId);
+        if (!sender.friends.includes(receiverId)) {
+            sender.friends.push(receiverId);
+            await sender.save();
+            console.log(sender);
         }
 
-        if (!receiverId.friends.includes(sender)) {
-            receiverId.friends.push(sender);
-            await receiverId.save();
+        if (!receiver.friends.includes(senderId)) {
+            receiver.friends.push(senderId);
+            await receiver.save();
             console.log(receiverId);
         }
 
