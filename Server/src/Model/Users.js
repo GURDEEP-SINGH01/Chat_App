@@ -14,13 +14,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    confirmPassword: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
     friends: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: []
     }],
     updatedAt: {
         type: Date,
