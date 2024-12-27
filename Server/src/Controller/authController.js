@@ -1,5 +1,7 @@
 const User = require('../Model/Users');
 const bcrypt = require('bcryptjs');
+const { generateTokenAndSetCookie } = require('../utils/generateToken');
+
 exports.signUp = async (req, res) => {
     try {
         const { email, username, password, confirmPassword } = req.body;
@@ -19,8 +21,12 @@ exports.signUp = async (req, res) => {
             confirmPassword,
         });
 
-        const newUser = await user.save();
-        res.status(201).send({ message: 'created', newUser });
+        if (user) {
+            generateTokenAndSetCookie(user._id, res);
+            const newUser = await user.save();
+            res.status(201).send({ message: 'created', newUser });
+        }
+
     } catch (err) {
         console.log('error', err);
         res.status(400).send({ message: err.message })
