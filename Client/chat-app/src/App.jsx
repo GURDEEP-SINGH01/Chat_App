@@ -1,8 +1,11 @@
+import { Home } from "./pages/home/Home"
+import { Login } from "./pages/login/Login"
+import { Signup } from "./pages/signup/Signup"
 
 function App() {
 
   return (
-    "hello"
+    <div className="h-screen w-screen p-4 flex items-center justify-center"><Home /></div>
   )
 }
 
