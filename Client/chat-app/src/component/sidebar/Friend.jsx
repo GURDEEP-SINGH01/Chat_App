@@ -17,7 +17,7 @@ export const Friend = () => {
                     </div>
                 </div>
             </div>
-            <div className="divider my-0 py-0 h-0" />
+            <div className="divider my-0 py-0 h-0 px-3" />
         </>
 
     )
