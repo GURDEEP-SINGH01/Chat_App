@@ -74,7 +74,8 @@ export const Signup = () => {
 
                     <div>
                         <button type="submit" onClick={handleSubmit} className="btn btn-block btn-md mt-2 ">
-                            <span className="label-text text-base">Signup</span>
+                            {loading ? <span className="loading loading-spinner" /> :
+                                <span className="label-text text-base">Signup</span>}
                         </button>
                     </div>
 

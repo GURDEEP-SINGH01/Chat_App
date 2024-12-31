@@ -1,5 +1,5 @@
 
-export const Friend = () => {
+export const Friend = ({ friend }) => {
     return (
         <>
             <div className="flex items-center hover:bg-orange-300 gap-2 p-2 py-1">
@@ -12,7 +12,7 @@ export const Friend = () => {
 
                 <div className="flex flex-col flex-1">
                     <div className="flex gap-2 justify-between">
-                        <p className=" text-black">Gurdeep</p>
+                        <p className=" text-black">{friend?.username}</p>
                         <span className="text-md">😊</span>
                     </div>
                 </div>
