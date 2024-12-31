@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 export const Signup = () => {
     return (
@@ -23,9 +24,9 @@ export const Signup = () => {
                         </label>
                         <input type="password" placeholder="Confirm Password" className="input input-bordered w-full h-10" />
                     </div>
-                    <a href="#" className=" text-sm hover:underline hover:text-blue-600">
+                    <Link to={"/login"} className=" text-sm hover:underline hover:text-blue-600">
                         {"Already have an Account?"}
-                    </a>
+                    </Link>
 
                     <div>
                         <button className="btn btn-block btn-md mt-2 ">
