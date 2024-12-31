@@ -15,5 +15,10 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      "/chatapp": {
+        target: "http://localhost:9000",
+      }
+    }
   }
 });
