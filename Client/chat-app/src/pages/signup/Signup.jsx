@@ -38,7 +38,7 @@ export const Signup = () => {
                         </label>
                         <input
                             type="email"
-                            placeholder="Enter Password"
+                            placeholder="Enter Email"
                             className="input input-bordered w-full h-10"
                             value={signUpInput.email}
                             onChange={(e) => setSignUpInput({ ...signUpInput, email: e.target.value })}
