@@ -47,7 +47,7 @@ exports.getMessages = async (req, res) => {
         res.send({ Messages: conversation.messages });
     } catch (err) {
         console.log("Err:-", err);
-        res.send({ status: "Error getting Message" });
+        res.send({ error: "Error getting Message" });
     }
 }
 

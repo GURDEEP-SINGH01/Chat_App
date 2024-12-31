@@ -29,7 +29,7 @@ exports.signUp = async (req, res) => {
 
     } catch (err) {
         console.log('error', err);
-        res.status(400).send({ message: err.message })
+        res.status(400).send({ error: err.message })
     }
 }
 
@@ -48,7 +48,7 @@ exports.signIn = async (req, res) => {
             username: user.username,
         });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 };
 exports.signOut = (req, res) => {
@@ -56,6 +56,6 @@ exports.signOut = (req, res) => {
         res.cookie("jwt", "", { maxAge: 0 });
         res.status(200).json({ message: "Logged out succesfully" });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 }
