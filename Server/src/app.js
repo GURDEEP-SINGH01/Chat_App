@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 
 const routes = require('./Routes/userRoutes');
-const app = express();
+const { app, server } = require('./socket/socket');
+
 
 dotenv.config();
 
@@ -20,6 +21,6 @@ mongoose.connect(DB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`server is running at port ${PORT}`);
 });

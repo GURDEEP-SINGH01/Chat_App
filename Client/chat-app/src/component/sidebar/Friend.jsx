@@ -1,16 +1,19 @@
+import { useSocketContext } from "../../Context/SocketContext"
 import useFriendsConversation from "../../Store/useFriendsConversation"
-import toast from "react-hot-toast"
 
 export const Friend = ({ friend }) => {
     const { selectedFriends, setSelectedFriends } = useFriendsConversation()
     const isSelectedConverstion = friend._id === selectedFriends?._id
+
+    const { onlineFriends } = useSocketContext();
+    const isFriendsOnline = onlineFriends.includes(friend._id)
     return (
         <>
             <div className={`flex items-center hover:bg-orange-300 gap-2 p-2 py-1 
              ${isSelectedConverstion ? "bg-orange-300" : ""}`}
                 onClick={() => { setSelectedFriends(friend); }}
             >
-                <div className="avatar online">
+                <div className={`avatar ${isFriendsOnline ? 'online' : ''}`}>
                     <div className="w-12 rounded-full">
                         <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>

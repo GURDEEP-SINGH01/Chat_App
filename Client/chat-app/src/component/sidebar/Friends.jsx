@@ -1,4 +1,3 @@
-import { useAuthContext } from '@/Context/AuthContext'
 import { Friend } from './Friend'
 import useGetFriends from '../../hooks/useGetFriends';
 import { useState } from 'react';
