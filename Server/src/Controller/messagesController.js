@@ -28,7 +28,7 @@ exports.sendMessages = async (req, res) => {
 
         //Promise all runs both function asynchonusly
         await Promise.all([conversation.save(), newMessage.save()]);
-        res.status(201).json({ message: "Message sent Successfully" });
+        res.status(201).json(newMessage);
     } catch (err) {
         console.log("Error occured", err);
         res.status(500).json({ error: "Internal server error" });
@@ -43,8 +43,7 @@ exports.getMessages = async (req, res) => {
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] },
         }).populate('messages')
-
-        res.send({ Messages: conversation.messages });
+        res.send(conversation.messages);
     } catch (err) {
         console.log("Err:-", err);
         res.send({ error: "Error getting Message" });

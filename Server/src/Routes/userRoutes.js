@@ -15,6 +15,6 @@ routes.post('/addFriends', userController.addFriends);
 routes.post('/getFriends', userController.getFriends);
 
 routes.post('/sendMessage', protectedRoutes, messageController.sendMessages);
-routes.get('/getMessage', protectedRoutes, messageController.getMessages);
+routes.post('/getMessage', protectedRoutes, messageController.getMessages);
 
 module.exports = routes;
