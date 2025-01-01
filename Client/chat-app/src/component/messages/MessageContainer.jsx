@@ -1,3 +1,4 @@
+import useFriendsConversation from "@/Store/useFriendsConversation";
 import { MessageInput } from "./MessageInput"
 import { Messages } from "./Messages"
 import { BiMessageSquareDetail } from "react-icons/bi";
@@ -17,12 +18,13 @@ const NoSelectedChat = () => {
 
 export const MessageContainer = () => {
     const noSelectedChat = true
+    const { selectedFriends, setSelectedFriends } = useFriendsConversation();
     return (
         <div className=" flex flex-col sm:min-w-[200px] md:min-w-[400px] bg-orange-300 rounded-md">
-            {noSelectedChat ? <NoSelectedChat /> :
+            {!selectedFriends ? <NoSelectedChat /> :
                 <>
-                    <div>
-                        <span className="label-text">Jake Sparrow</span>
+                    <div className="px-2 bg-orange-400">
+                        <span className="label-text font-semibold">{selectedFriends.username}</span>
                     </div>
                     <Messages />
                     <MessageInput />
