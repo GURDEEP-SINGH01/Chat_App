@@ -9,7 +9,7 @@ const { app, server } = require('./socket/socket');
 
 dotenv.config();
 
-const DB_URI = process.env.DB_URI;
+// const DB_URI = process.env.DB_URI;
 const PORT = process.env.PORT || 5000;
 
 //Routes and Middleware
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/chatapp', routes);
 
-mongoose.connect(DB_URI, {
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
