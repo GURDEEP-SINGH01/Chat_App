@@ -9,7 +9,7 @@ const { app, server } = require('./socket/socket');
 
 dotenv.config();
 
-const DB_URI = 'mongodb://localhost:27017/chatapp'
+const DB_URI = process.env.DB_URI;
 const PORT = process.env.PORT || 5000;
 
 //Routes and Middleware
