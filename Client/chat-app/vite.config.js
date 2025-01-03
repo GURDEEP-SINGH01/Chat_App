@@ -17,7 +17,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/chatapp": {
-        target: "http://localhost:9000",
+        target: "ec2-35-154-199-39.ap-south-1.compute.amazonaws.com:9000",
       }
     }
   }
