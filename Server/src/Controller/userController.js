@@ -21,21 +21,33 @@ exports.addFriends = async (req, res) => {
         const receiver = await User.findOne({ _id: receiverId });
 
         if (!sender || !receiver) {
-            res.status(404).json({ message: "User not Found" });
+            return res.status(404).json({ message: "User not Found" });
         }
+
         if (!sender.friends.includes(receiverId)) {
             sender.friends.push(receiverId);
             await sender.save();
-            console.log(sender);
-        }
-
-        if (!receiver.friends.includes(senderId)) {
-            receiver.friends.push(senderId);
-            await receiver.save();
-            console.log(receiverId);
+        } else {
+            return res.json({ message: "Friend exist" });
         }
 
         res.json({ message: "Friend added" });
+    } catch (error) {
+        console.log("Err", error)
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
+exports.searchFriends = async (req, res) => {
+    try {
+        const { searchId } = req.body;
+        const searchUser = await User.findOne({ username: searchId });
+
+        if (!searchUser) {
+            return res.status(404).json({ message: "No User Found" });
+        }
+
+        res.status(200).json(searchUser);
     } catch (error) {
         console.log("Err", error)
         res.status(500).json({ message: 'Server error', error: error.message });

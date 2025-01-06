@@ -13,6 +13,7 @@ routes.post('/signout', authController.signOut);
 
 routes.post('/addFriends', userController.addFriends);
 routes.post('/getFriends', userController.getFriends);
+routes.post('/searchFriends', userController.searchFriends);
 
 routes.post('/sendMessage', protectedRoutes, messageController.sendMessages);
 routes.post('/getMessage', protectedRoutes, messageController.getMessages);

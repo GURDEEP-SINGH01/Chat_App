@@ -1,9 +1,9 @@
 import { Friend } from './Friend'
 import useGetFriends from '../../hooks/useGetFriends';
-import { useState } from 'react';
+import useFriendsList from '../../Store/useFriendsList';
 
 export const Friends = () => {
-    const [friends, setFriends] = useState([]);
+    const { friends, setFriends } = useFriendsList();
     const { loading } = useGetFriends(friends, setFriends);
     return (
         <div className='flex flex-col overflow-auto'>
