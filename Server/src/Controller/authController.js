@@ -1,5 +1,6 @@
 const User = require('../Model/Users');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 const { generateTokenAndSetCookie } = require('../utils/generateToken');
 
 exports.signUp = async (req, res) => {
@@ -9,7 +10,26 @@ exports.signUp = async (req, res) => {
         if (password != confirmPassword) {
             return res.send(400).json({ error: "Passwords don't match" })
         }
-
+        const transporter = nodemailer.createTransport({
+            service: "Gmail",
+            auth: {
+                user: 'leomessi1431999@gmail.com',
+                pass: process.env.EMAIL_PASSWORD
+            }
+        })
+        const mailOptions = {
+            from: 'leomessi1431999@gmail.com',
+            to: email,
+            subject: 'new Subject',
+            text: 'gurdeep nice to meet you'
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error)
+                return res.status(500).send(error);
+            }
+            res.status(200).send("Email sent successfully");
+        });
         //HASH Password
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);

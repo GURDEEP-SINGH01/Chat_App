@@ -1,3 +1,4 @@
+import OtpModal from "../../component/modal/OtpModal"
 import useSignup from "../../hooks/useSignup"
 import { useState } from "react"
 import { Link } from "react-router-dom"
@@ -11,6 +12,7 @@ export const Signup = () => {
         confirmPassword: "",
     })
     const { loading, signup } = useSignup(signUpInput);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         await signup(signUpInput);
@@ -19,7 +21,7 @@ export const Signup = () => {
         <div className="flex items-center justify-center h-auto min-w-96">
             <div className="w-full bg-orange-200 p-6 rounded-xl">
                 <h1 className="text-3xl font-semibold text-center">Signup</h1>
-                <form>
+                <form onSubmit={e => e.preventDefault()}>
                     <div>
                         <label className="label">
                             <span className="label-text text-base">Username</span>
@@ -33,19 +35,22 @@ export const Signup = () => {
                         />
                     </div>
                     <div>
-                        <label className="label">
+                        <label className="label py-1">
                             <span className="label-text text-base">Email</span>
                         </label>
-                        <input
-                            type="email"
-                            placeholder="Enter Email"
-                            className="input input-bordered w-full h-10"
-                            value={signUpInput.email}
-                            onChange={(e) => setSignUpInput({ ...signUpInput, email: e.target.value })}
-                        />
+                        <div className="flex">
+                            <input
+                                type="email"
+                                placeholder="Enter Email"
+                                className="input input-bordered w-full h-10"
+                                value={signUpInput.email}
+                                onChange={(e) => setSignUpInput({ ...signUpInput, email: e.target.value })}
+                            />
+                            <OtpModal />
+                        </div>
                     </div>
                     <div>
-                        <label className="label">
+                        <label className="label py-1">
                             <span className="label-text text-base">Password</span>
                         </label>
                         <input
@@ -57,7 +62,7 @@ export const Signup = () => {
                         />
                     </div>
                     <div>
-                        <label className="label">
+                        <label className="label py-1">
                             <span className="label-text text-base">Confirm Password</span>
                         </label>
                         <input
@@ -68,7 +73,7 @@ export const Signup = () => {
                             onChange={(e) => setSignUpInput({ ...signUpInput, confirmPassword: e.target.value })}
                         />
                     </div>
-                    <Link to={"/login"} className=" text-sm hover:underline hover:text-blue-600">
+                    <Link to={"/login"} className=" text-sm hover:underline hover:text-blue-600 py-1">
                         {"Already have an Account?"}
                     </Link>
 
@@ -80,7 +85,7 @@ export const Signup = () => {
                     </div>
 
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
