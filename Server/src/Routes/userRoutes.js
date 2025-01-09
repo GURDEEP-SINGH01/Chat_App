@@ -9,6 +9,7 @@ const { protectedRoutes } = require('../middleware/protectdRoutes');
 routes.post('/signup', authController.signUp);
 routes.post('/signin', authController.signIn);
 routes.post('/signout', authController.signOut);
+routes.post('/emailVerify', authController.otpVerify);
 
 
 routes.post('/addFriends', userController.addFriends);

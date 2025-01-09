@@ -3,13 +3,10 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const { generateTokenAndSetCookie } = require('../utils/generateToken');
 
-exports.signUp = async (req, res) => {
-    try {
-        const { email, username, password, confirmPassword } = req.body;
 
-        if (password != confirmPassword) {
-            return res.send(400).json({ error: "Passwords don't match" })
-        }
+exports.otpVerify = async (req, res) => {
+    try {
+        const { email } = req.body
         const transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
@@ -30,6 +27,19 @@ exports.signUp = async (req, res) => {
             }
             res.status(200).send("Email sent successfully");
         });
+    } catch (error) {
+        res.status(400).send({ error: err.message })
+    }
+}
+
+exports.signUp = async (req, res) => {
+    try {
+        const { email, username, password, confirmPassword } = req.body;
+
+        if (password != confirmPassword) {
+            return res.send(400).json({ error: "Passwords don't match" })
+        }
+
         //HASH Password
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
