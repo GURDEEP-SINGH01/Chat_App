@@ -17,15 +17,15 @@ exports.otpVerify = async (req, res) => {
         const mailOptions = {
             from: 'leomessi1431999@gmail.com',
             to: email,
-            subject: 'new Subject',
-            text: 'gurdeep nice to meet you'
+            subject: 'Verification OTP',
+            text: 'Your new Otp :- 1010'
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.log(error)
                 return res.status(500).send(error);
             }
-            res.status(200).send("Email sent successfully");
+            res.status(200).json({ message: "Email sent successfully", data: mailOptions });
         });
     } catch (error) {
         res.status(400).send({ error: err.message })

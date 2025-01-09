@@ -46,7 +46,7 @@ export const Signup = () => {
                                 value={signUpInput.email}
                                 onChange={(e) => setSignUpInput({ ...signUpInput, email: e.target.value })}
                             />
-                            <OtpModal />
+                            <OtpModal email={signUpInput.email} />
                         </div>
                     </div>
                     <div>
