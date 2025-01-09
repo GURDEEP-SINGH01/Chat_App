@@ -7,7 +7,6 @@ const useGetEmailOtp = (setEmailData) => {
             const getemailData = await axios.post('chatapp/emailVerify', {
                 email
             })
-            console.log(getemailData.data.data);
             if (getemailData)
                 setEmailData(getemailData.data.data)
         } catch (err) {

@@ -10,7 +10,6 @@ const OtpModal = ({ email }) => {
     const handleModal = async () => {
         document.getElementById('my_modal_1').showModal();
         await sendEmailOtp(email);
-        console.log(emailData);
     }
 
     const handleOtpSubmit = () => {
