@@ -10,7 +10,7 @@ const NoSelectedChat = () => {
     return (
         <div className="flex justify-center items-center w-full h-full">
             <div className="text-center items-center flex flex-col">
-                <p>Welcome👋 {authUser.data.newUser.username}</p>
+                <p>Welcome👋 {authUser.data.user.username}</p>
                 <p>Choose a Friend to Chat</p>
                 <BiMessageSquareDetail />
             </div>

@@ -53,8 +53,8 @@ exports.signUp = async (req, res) => {
 
         if (user) {
             generateTokenAndSetCookie(user._id, res);
-            const newUser = await user.save();
-            res.status(201).json({ message: 'created', newUser });
+            await user.save();
+            res.status(201).json({ message: 'created', user });
         }
 
     } catch (err) {
