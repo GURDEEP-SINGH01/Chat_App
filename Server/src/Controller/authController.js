@@ -54,7 +54,7 @@ exports.signUp = async (req, res) => {
         if (user) {
             generateTokenAndSetCookie(user._id, res);
             const newUser = await user.save();
-            res.status(201).send({ message: 'created', newUser });
+            res.status(201).json({ message: 'created', newUser });
         }
 
     } catch (err) {
@@ -74,8 +74,7 @@ exports.signIn = async (req, res) => {
         }
         generateTokenAndSetCookie(user._id, res);
         res.json({
-            _id: user._id,
-            username: user.username,
+            user
         });
     } catch (error) {
         res.status(500).json({ success: false, error: 'Server error' });

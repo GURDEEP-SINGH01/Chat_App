@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import useGetEmailOtp from "../../hooks/useGetEmailOtp";
 import { useState } from "react";
 
-const OtpModal = ({ email }) => {
+const OtpModal = ({ email, setValidOtp }) => {
     const [emailData, setEmailData] = useState(null)
     const [otp, setOtp] = useState('');
     const { sendEmailOtp } = useGetEmailOtp(setEmailData);
@@ -17,7 +17,8 @@ const OtpModal = ({ email }) => {
             const emailOtp = emailData.text.slice(-4);
             if (emailOtp === otp) {
                 document.getElementById('my_modal_1').close();
-                toast.success('Valid otp')
+                toast.success('Valid otp');
+                setValidOtp(true);
             } else {
                 toast.error('Please verify the Otp');
             }

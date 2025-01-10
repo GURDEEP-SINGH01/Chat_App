@@ -7,11 +7,10 @@ import { useAuthContext } from "../../Context/AuthContext";
 
 const NoSelectedChat = () => {
     const { authUser } = useAuthContext();
-
     return (
         <div className="flex justify-center items-center w-full h-full">
             <div className="text-center items-center flex flex-col">
-                <p>Welcome👋 {authUser.data.username}</p>
+                <p>Welcome👋 {authUser.data.newUser.username}</p>
                 <p>Choose a Friend to Chat</p>
                 <BiMessageSquareDetail />
             </div>

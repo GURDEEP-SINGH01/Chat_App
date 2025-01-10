@@ -5,7 +5,7 @@ exports.getFriends = async (req, res) => {
         const { senderId } = req.body
         const user = await User.findOne({ _id: senderId });
         const friendsList = await Promise.all(
-            user.friends.map((friend) => User.findOne({ _id: friend }))
+            user?.friends?.map?.((friend) => User.findOne({ _id: friend }))
         );
         res.status(200).json(friendsList);
     } catch (error) {

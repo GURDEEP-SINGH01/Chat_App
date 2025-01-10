@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 const useSignup = () => {
     const [loading, setLoading] = useState(false);
     const { setAuthUser } = useAuthContext();
-    const signup = async ({ username, email, password, confirmPassword }) => {
-        const success = handleInputError({ username, email, password, confirmPassword });
+    const signup = async ({ username, email, password, confirmPassword }, validOtp) => {
+        const success = handleInputError({ username, email, password, confirmPassword }, validOtp);
         if (!success) return;
         setLoading(true);
 
@@ -26,9 +26,15 @@ const useSignup = () => {
     return { loading, signup };
 }
 
-const handleInputError = ({ username, email, password, confirmPassword }) => {
+const handleInputError = ({ username, email, password, confirmPassword }, validOtp) => {
+    console.log(username, email, password, confirmPassword, validOtp);
+
     if (!username || !password || !email || !confirmPassword) {
         toast.error('Please fill all the Fields');
+        return false;
+    }
+    if (!validOtp) {
+        toast.error('Please verify Email');
         return false;
     }
     if (password !== confirmPassword) {

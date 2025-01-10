@@ -1,10 +1,11 @@
+import toast from "react-hot-toast"
 import OtpModal from "../../component/modal/OtpModal"
 import useSignup from "../../hooks/useSignup"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
 export const Signup = () => {
-
+    const [validOtp, setValidOtp] = useState(false);
     const [signUpInput, setSignUpInput] = useState({
         username: "",
         email: "",
@@ -15,7 +16,7 @@ export const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await signup(signUpInput);
+        await signup(signUpInput, validOtp);
     }
     return (
         <div className="flex items-center justify-center h-auto min-w-96">
@@ -46,7 +47,7 @@ export const Signup = () => {
                                 value={signUpInput.email}
                                 onChange={(e) => setSignUpInput({ ...signUpInput, email: e.target.value })}
                             />
-                            <OtpModal email={signUpInput.email} />
+                            <OtpModal email={signUpInput.email} setValidOtp={setValidOtp} />
                         </div>
                     </div>
                     <div>
