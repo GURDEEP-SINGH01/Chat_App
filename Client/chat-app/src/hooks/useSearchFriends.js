@@ -22,7 +22,7 @@ const useSearchFriends = () => {
                 addFriend(searchedFriend.data)
             }
         } catch (err) {
-            toast.error(err);
+            toast.error(err.response.data.message);
         } finally {
             setLoading(false);
         }
@@ -31,7 +31,7 @@ const useSearchFriends = () => {
     const addFriend = async (friend) => {
         try {
             const addFriend = await axios.post('/chatapp/addFriends', {
-                senderId: authUser.data,
+                senderId: authUser.data.user._id,
                 receiverId: friend._id
             })
             if (addFriend.data.message != 'Friend exist') {
@@ -40,7 +40,7 @@ const useSearchFriends = () => {
                 toast('Already a friend', { style: { color: 'black', fontFamily: 'monospace' } })
             }
         } catch (err) {
-            toast.error(err);
+            toast.error(err.response.data.message);
         }
     }
     return { loading, searchFriends }
