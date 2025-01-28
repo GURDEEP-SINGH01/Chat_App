@@ -5,7 +5,7 @@ import useGetFriends from "../../hooks/useGetFriends";
 export const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedFriends } = useFriendsConversation();
-    const fromMe = message.senderId === authUser.data._id;
+    const fromMe = message.senderId === authUser.data.user._id;
     const chatAlign = fromMe ? 'chat-end' : 'chat-start';
 
 

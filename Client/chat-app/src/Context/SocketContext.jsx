@@ -18,9 +18,9 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io('http://localhost/chatapp:9000', {
+            const socket = io('http://localhost:9000', {
                 query: {
-                    userId: authUser.data._id
+                    userId: authUser.data.user._id
                 }
             })
             setSocket(socket);
