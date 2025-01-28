@@ -15,7 +15,7 @@ const useGetFriends = (friends, setFriends) => {
             }
             setLoading(true);
             try {
-                const friendsList = await axios.post('/chatapp/getFriends', { senderId: authUser.data._id });
+                const friendsList = await axios.post('/chatapp/getFriends', { senderId: authUser.data.user._id });
 
                 if (friendsList) { setFriends(friendsList.data); }
             } catch (err) { toast.error('Cant retrive Friends', err) }
