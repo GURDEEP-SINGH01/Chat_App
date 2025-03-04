@@ -49,7 +49,8 @@ exports.getMessages = async (req, res) => {
 
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] },
-        }).populate('messages')
+        }).populate('messages');
+        if (!conversation) return res.send("");
         res.send(conversation.messages);
     } catch (err) {
         console.log("Err:-", err);
