@@ -17,7 +17,7 @@ exports.otpVerify = async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Verification OTP',
+            subject: 'Verification OTP do-reply!',
             text: 'Your new Otp :- 1010'
         };
         transporter.sendMail(mailOptions, (error, info) => {
