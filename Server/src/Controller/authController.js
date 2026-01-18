@@ -10,12 +10,12 @@ exports.otpVerify = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
-                user: 'leomessi1431999@gmail.com',
+                user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD
             }
         })
         const mailOptions = {
-            from: 'leomessi1431999@gmail.com',
+            from: process.env.EMAIL_USER,
             to: email,
             subject: 'Verification OTP',
             text: 'Your new Otp :- 1010'
